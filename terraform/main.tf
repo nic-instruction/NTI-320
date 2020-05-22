@@ -46,7 +46,7 @@ output "ip" {
 }
 
 resource "google_compute_firewall" "default" {
- name    = “apache-firewall"
+ name    = "apache-firewall"
  network = "default"
 
  allow {
