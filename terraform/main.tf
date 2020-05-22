@@ -12,7 +12,7 @@ resource "random_id" "instance_id" {
 
 // A single Google Cloud Engine instance
 resource "google_compute_instance" "default" {
- name         = “apache-vm-${random_id.instance_id.hex}"
+ name         = "apache-vm-${random_id.instance_id.hex}"
  machine_type = "f1-micro"
  zone         = "us-central1-a"
 
@@ -28,7 +28,7 @@ resource "google_compute_instance" "default" {
  }
 
 // Make sure httpd is installed on all new instances for later steps
- metadata_startup_script = "sudo apt-get install apache2; systemctl enable apache2; systemctl start apache2”
+ metadata_startup_script = "sudo apt-get install apache2; systemctl enable apache2; systemctl start apache2"
 
  network_interface {
    network = "default"
