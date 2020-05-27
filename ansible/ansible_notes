@@ -1,0 +1,13 @@
+~/.local/bin/ansible-inventory --graph -i ~/ansible/inventories/webservers_gcp.yml
+~/.local/bin/ansible-inventory --list -i inventories ~/ansible/inventories/webservers_gcp.yml | more
+~/.local/bin/ansible-playbook -i ~/ansible/inventories/webservers_gcp.yml playbook/httpd_playbook.yml
+
+The golden ticket:
+~/.local/bin/ansible-playbook -vvv -e "ansible_user=ansible" -i ~/ansible/inventories/webservers_gcp.yml playbook/httpd_playbook.yml --key-file="~/.ssh/ansible" | more
+
+
+
+Testing:
+Test connection: ssh -i ~/.ssh/ansible ansible@130.211.236.150
+
+ssh -C -o ControlMaster=auto -o ControlPersist=60s -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'IdentityFile="/home/nicolebade/.ssh/ansible"' -o 'User="ansible"' -o ConnectTimeout=10 -o ControlPath=/home/nicolebade/.ansible/cp/64914f31d2 130.211.236.150 '/bin/sh -c '"'"'echo ~ansible && sleep 0'"'”''
