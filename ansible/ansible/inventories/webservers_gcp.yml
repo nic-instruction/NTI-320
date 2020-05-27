@@ -1,0 +1,13 @@
+---
+plugin: gcp_compute
+zones:
+ - us-central1-a
+projects:
+  - nti-320-spring-2020
+filters: []
+groups:
+  webservers: "'web-' in name"
+scopes:
+  - https://www.googleapis.com/auth/compute
+service_account_file: ~/ansible/nti-320-spring-2020-af58f415a589.json
+auth_kind: serviceaccount
