@@ -91,6 +91,6 @@ systemctl restart snmpd
 
 %postun
 rm /etc/nrpe.d/nti320.cfg
-rm /etc/sudoers/nrpe_suders
+rm /etc/sudoers.d/nrpe_sudoers
 rm /thisworked
 %changelog				# changes you (and others) have made and why
