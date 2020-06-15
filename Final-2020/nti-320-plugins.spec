@@ -54,16 +54,16 @@ install -m 0755 * %{buildroot}/usr/lib64/nagios/plugins/
 
 %post
 
-nagiosip=""
-rsyslogip=""
-cactiip=""
+nagiosip="10.128.0.4"
+rsyslogip="10.128.0.15"
+cactiip="10.128.0.9"
 
 touch /thisworked
 
 mv /etc/snmp/snmpd.conf /etc/snmp/snmpd.conf.orig
 
-echo '# create myuser in mygroup authenticating with 'public' community string and source network $cactiip/24
-com2sec myUser $cactiip/24 public
+echo '# create myuser in mygroup authenticating with 'public' community string and source network '$cactiip'/24
+com2sec myUser '$cactiip'/24 public
 # myUser is added into the group 'myGroup' and the permission of the group is defined
 group    myGroup    v1        myUser
 group    myGroup    v2c        myUser
@@ -73,7 +73,7 @@ access myGroup    ""    any    noauth     exact    all    all    none' >> /etc/s
 
 wget -O /usr/lib64/nagios/plugins/check_mem.sh https://raw.githubusercontent.com/nic-instruction/hello-nti-320/master/check_mem.sh
 chmod +x /usr/lib64/nagios/plugins/check_mem.sh
-sed -i 's/allowed_hosts=127.0.0.1/allowed_hosts=127.0.0.1, $nagiosip/g' /etc/nagios/nrpe.cfg
+sed -i "s/allowed_hosts=127.0.0.1/allowed_hosts=127.0.0.1, $nagiosip/g" /etc/nagios/nrpe.cfg
 echo "command[check_disk]=/usr/lib64/nagios/plugins/check_disk -w 20% -c 10% -p /dev/disk" >> /etc/nagios/nrpe.cfg
 echo "command[check_mem]=/usr/lib64/nagios/plugins/check_mem.sh -w 80 -c 90" >> /etc/nagios/nrpe.cfg 
 
