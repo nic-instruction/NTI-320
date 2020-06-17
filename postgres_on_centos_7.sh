@@ -30,7 +30,7 @@ CREATE DATABASE mypgdb OWNER pgdbuser;
 GRANT ALL PRIVILEGES ON DATABASE mypgdb TO pgdbuser;" > /tmp/phpmyadmin
 sudo -u postgres /bin/psql -f /tmp/phpmyadmin
 yum install -y phpPgAdmin
-
+cp /etc/phpPgAdmin/config.inc.php-dist /etc/phpPgAdmin/config.inc.php
 sed -i 's/Require local/Require all granted/g' /etc/httpd/conf.d/phpPgAdmin.conf
 sed -i 's/Deny from all/Allow from all/g' /etc/httpd/conf.d/phpPgAdmin.conf
 sed -i "s/$conf\['servers'\]\[0\]\['host'\] = '';/$conf['servers'][0]['host'] = 'localhost';/g" /etc/phpPgAdmin/config.inc.php
