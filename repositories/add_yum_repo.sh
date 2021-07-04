@@ -16,6 +16,5 @@ gpgcheck=0
 yum repolist
 
 yum search hello-world
-                                                     
-
+                              
 
